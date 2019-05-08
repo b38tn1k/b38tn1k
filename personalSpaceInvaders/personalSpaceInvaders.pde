@@ -1,7 +1,10 @@
 //int colors[] = {#EBB858, #EEA8C1, #D0CBC3, #87B6C4, #EA4140, #5A5787, #D0CBC3, #87B6C4, #EA4140, #5A5787};
 //green = #7FB800
 int colors[] = {#F6511D, #FFB400, #00A6ED, #7FB800, #E56399, #FFFFFF};
+//int colors[] = {#845EC2, #D65DB1, #FF6F91, #FF9671, #FFC75F, #F9F871};
 //int colors[] = {#F6511D, #FFB400, #00A6ED, #E56399, #FFFFFF};
+
+//int colors[] = {#FFFFFF, #1F4979, #AAC4CE, #D1D4D4, #919091, #F2822C, #F1F2F3}; //ford
 int rcol() {
   return colors[int(random(colors.length))];
 };
