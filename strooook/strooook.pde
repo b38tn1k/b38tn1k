@@ -71,8 +71,8 @@ void generate() {
       strookxishdown(j, width-100, 75, position, col1, col2);
     }
   }
-  saveImage();
-  generate();
+  //saveImage();
+  //generate();
 }
 
 void strookx(float startx, float endx, float y, int cs, int ce) {
@@ -103,6 +103,7 @@ void strookxishdown(float startx, float endx, float ish, float y, int cs, int ce
 void setup() {
   //size(1920, 1920, P2D);
   size(1080, 1080, P2D);
+  
   smooth(8);
   pixelDensity(2);
   background(rcol());
