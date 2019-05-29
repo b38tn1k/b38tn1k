@@ -41,7 +41,7 @@ void generate() {
   background(bg);
   fill(bg);
   stroke(rcol());
-  strokeWeight(2);
+  strokeWeight(4);
   
   //bg = #000000;
   //background(bg);
@@ -64,7 +64,7 @@ void generate() {
   //  }
   //}
   
-  float subDiv = width/75;  
+  float subDiv = height/75;  
   float xsub = 2*subDiv;
   for (float y = subDiv*20; y <= height; y += 2*subDiv) {
     fill(lerpColor(c1, c2, y/height));
@@ -88,24 +88,29 @@ void generate() {
     vertex(width, height);
     endShape(CLOSE);
   }
-  fill(rcol());
+  //fill(rcol());
   //fill(bg);
-  //fill(0);
-  noStroke();
-  subDiv *= 5;
-  rect(0, 0, subDiv, height);
-  rect(0, 0, width, subDiv);
-  rect(0, height-subDiv, width, subDiv);
-  rect(width-subDiv, 0, width, height);
+    //fill(0);
+    
+  //fill(bg);
+  //noStroke();
+  //subDiv *= 5;
+  //rect(0, 0, subDiv, height);
+  //rect(0, 0, width, subDiv);
+  //rect(0, height-subDiv, width, subDiv);
+  //rect(width-subDiv, 0, width, height);
+  
   //stroke(#FFFFFF);
   //stroke(bg);
   //strokeWeight(2);
-  noFill();
-  rect(subDiv, subDiv, width-2*subDiv, height-2*subDiv);
+  //noFill();
+  //rect(subDiv, subDiv, width-2*subDiv, height-2*subDiv);
+  saveImage();
+  generate();
 }
 
 void setup() {
-  size(1080, 1080, P2D);
+  size(7680, 2160, P2D);
   smooth(8);
   pixelDensity(2);
   background(255);
