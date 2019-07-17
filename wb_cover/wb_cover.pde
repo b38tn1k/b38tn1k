@@ -5,7 +5,8 @@
 //int colors[] = {#F6511D, #FFB400, #00A6ED, #E56399, #FFFFFF};
 
 //int colors[] = {#FFFFFF, #1F4979, #AAC4CE, #D1D4D4, #919091, #F2822C, #F1F2F3}; //ford
-int colors[] = {#ff71ce, #05ffa1, #b967ff, #fffb96}; //vaporwave
+//int colors[] = {#ff71ce, #05ffa1, #b967ff, #fffb96}; //vaporwave
+int colors[] = {#B48277, #837C99, #8B6267, #A8264E, #ACA4A6}; //wb
 
 PFont mono;
 PFont smallfont;
@@ -40,7 +41,7 @@ void saveImage() {
 }
 
 void generate() {
-  background(0);
+  background(#090E35);
   noStroke();
   int vert = 10;
   int hor = 10;
@@ -53,7 +54,9 @@ void generate() {
   char free[] = {'F', 'R', 'E', 'E'};
   textFont(mono);
   textAlign(CENTER, CENTER);
-  int mycolor = #01cdfe;
+  //int mycolor = #01cdfe;
+  //int mycolor = #B31460;
+  int mycolor =   #C67762;
   int subx = 0;
   int suby = 0;
   
@@ -180,7 +183,7 @@ void setup() {
   smooth(8);
   pixelDensity(2);
   background(0);
-  mono = createFont("bit.TTF", 72);
+  mono = createFont("bit.TTF", 80);
   smallfont = createFont("bit.TTF", 40);
   generate();
   noStroke();
