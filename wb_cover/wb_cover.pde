@@ -5,8 +5,9 @@
 //int colors[] = {#F6511D, #FFB400, #00A6ED, #E56399, #FFFFFF};
 
 //int colors[] = {#FFFFFF, #1F4979, #AAC4CE, #D1D4D4, #919091, #F2822C, #F1F2F3}; //ford
-//int colors[] = {#ff71ce, #05ffa1, #b967ff, #fffb96}; //vaporwave
-int colors[] = {#B48277, #837C99, #8B6267, #A8264E, #ACA4A6}; //wb
+//int colors[] = {#ff71ce, #05ffa1, #b967ff, #fffb96}; //vaporwave 
+//int colors[] = {#B48277, #837C99, #8B6267, #A8264E, #ACA4A6}; //wb1
+int colors[] = {#C87996,#2E3862,#B1373A,#DE6D4A,#3C3061,#B67F9C,#EBCECE,#DC6D49,#A53B4C,#D67055,#923359,#2A356D,#CD7B8B,#EDD0D1};
 
 PFont mono;
 PFont smallfont;
@@ -41,7 +42,8 @@ void saveImage() {
 }
 
 void generate() {
-  background(#090E35);
+  //background(#090E35);
+  background(0);
   noStroke();
   int vert = 10;
   int hor = 10;
@@ -56,7 +58,8 @@ void generate() {
   textAlign(CENTER, CENTER);
   //int mycolor = #01cdfe;
   //int mycolor = #B31460;
-  int mycolor =   #C67762;
+  //int mycolor =   #C67762;
+  int mycolor =   #ECCACF;
   int subx = 0;
   int suby = 0;
   
@@ -94,6 +97,8 @@ void generate() {
   textFont(smallfont);
   fill(mycolor);
   text("BAJA  ALL  TERRAIN  VERSION", subx - 21, suby + 8*6);
+  saveImage();
+  generate();
 }
 
 void invader(int x, int y, int pixelSize, float invLength, float invHeight) {
