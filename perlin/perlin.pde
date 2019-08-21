@@ -30,6 +30,10 @@ boolean coin() {
   return random(1) > .5;
 };
 
+boolean rcoin() {
+  return random(1) > .9;
+};
+
 int randint(int x) {
   return int(random(x));
 };
@@ -54,7 +58,8 @@ void saveImage() {
 
 
 void generate() {
-  sky(0.01);
+  
+  sky(0.009);
   int scale = 3;
   float noiseVal = 0.004;
   float pos = 0.8;
@@ -66,15 +71,21 @@ void generate() {
   float bumpScale = 0.001;
   int mountainPos = int((height/3)*pos);
   int mountainGap;
+  int[] yheight;
+  int fw = 2;
+  int fh = 4;
   for (int i = 0; i < mountainCount; i++) {
     int temp = int((height/3)*pos);
     mountainGap = temp - mountainPos; 
     mountainPos = temp;
-    mountains(c1, c2, mountainPos, scale, noiseVal, bumpScale);
+    yheight = mountains(c1, c2, mountainPos, scale, noiseVal, bumpScale);
+    forest(yheight, fw, fh, c1, s1, 70);
     pos += 0.2;
     scale += 5;
     noiseVal -= 0.0005;
     bumpScale += 0.001;
+    fw += 3;
+    fh += 8;
     c1 = lerpColor(farMountainColor1, midMountainColor1, float(i)/mountainCount);
     c2 = lerpColor(farMountainColor2, midMountainColor2, float(i)/mountainCount);
     s1 = lerpColor(shrubColor1, shrubColor2, float(i)/mountainCount);
@@ -82,15 +93,26 @@ void generate() {
   }
   grab = true;
 };
+ 
+void forest(int[] yheight, float w, float h, int baseColor, int tipColor, int gap) {
+  for (int x = 0; x < width; x+=step) {
+    if (rcoin()) {
+      int ypos = int(random(yheight[int(x/step)], yheight[int(x/step)] + gap));
+      tree1(x, ypos, w, h, tipColor, baseColor);
+    }
+  }
+}
 
-void mountains(int c1, int c2, int pos, int scale, float noiseScale, float bumpScale) {
+int[] mountains(int c1, int c2, int pos, int scale, float noiseScale, float bumpScale) {
   noiseSeed(int(random(1000)));
   noStroke();
+  int[] yheight = new int[width/step];
   int midColor = lerpColor(c1, c2, 0.5);
   for (int x=0; x < width; x+=step) {
     float noiseVal = noise(x*noiseScale);
     int this_height = int(noiseVal * height/scale) + pos;
     this_height = int(this_height/step) * step;
+    yheight[int(x/step)] = this_height;
     for (int y = this_height; y < height; y+=step) {
       float lerper = float(y - this_height) / (this_height);
       int this_color = lerpColor(c1, c2, lerper);
@@ -102,9 +124,29 @@ void mountains(int c1, int c2, int pos, int scale, float noiseScale, float bumpS
       //
       fill(this_color);
       rect(x, y, step, step);
+      //if (rcoin()) {
+      //  tree1(x, y, 20, 50, shrubColor1, this_color);
+      //}
     }
   }
+  return yheight;
 };
+
+void tree1(float x, float y, float w, float h, int c1, int c2) {
+  x = x - w/2 * step;
+  y = y - h/2 * step;
+  for (int j = 0; j < h; j++) {
+    int watp = int(sin((j/h)*2.5) * w);
+    int watps = int((w - watp));
+    for (int i = watps; i < watp; i++) {
+      int col = lerpColor(c1, c2, j/h);
+      fill(col);
+      float _x = x + i * step;
+      float _y = y + j * step;
+      rect(_x, _y, step, step);
+    }
+  }
+}
 
 void sky(float noiseScale) {
   noiseSeed(int(random(1000)));
@@ -116,7 +158,7 @@ void sky(float noiseScale) {
       float noiseVal = noise(x*noiseScale, y*noiseScale);
       //float otherNoise = noise(x*noiseScale*10, y*noiseScale*10);
       //noiseVal = noiseVal / otherNoise;
-      int this_color = lerpColor(cloudWhite, skyBlue, noiseVal); 
+      int this_color = lerpColor(cloudWhite, skyBlue, noiseVal);
       fill(this_color);
       rect(x, y, step, step);
     }
@@ -129,7 +171,6 @@ void setup() {
 };
 
 void draw() {
-  
   if (grab) {
     bg = get();
     grab = false;
