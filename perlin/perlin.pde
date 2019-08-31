@@ -31,7 +31,7 @@ boolean coin() {
 };
 
 boolean rcoin() {
-  return random(1) > .9;
+  return random(1) > .95;
 };
 
 int randint(int x) {
@@ -67,7 +67,7 @@ void generate() {
   int c2 = farMountainColor2;
   int s1 = shrubColor1;
   int s2 = shrubColor3;
-  int mountainCount = 10;
+  int mountainCount = 7;
   float bumpScale = 0.001;
   int mountainPos = int((height/3)*pos);
   int mountainGap;
@@ -79,8 +79,8 @@ void generate() {
     mountainGap = temp - mountainPos; 
     mountainPos = temp;
     yheight = mountains(c1, c2, mountainPos, scale, noiseVal, bumpScale);
-    forest(yheight, fw, fh, c1, s1, 70);
-    pos += 0.2;
+    forest(yheight, fw, fh, s1, 70);
+    pos += 0.3;
     scale += 5;
     noiseVal -= 0.0005;
     bumpScale += 0.001;
@@ -88,16 +88,19 @@ void generate() {
     fh += 8;
     c1 = lerpColor(farMountainColor1, midMountainColor1, float(i)/mountainCount);
     c2 = lerpColor(farMountainColor2, midMountainColor2, float(i)/mountainCount);
-    s1 = lerpColor(shrubColor1, shrubColor2, float(i)/mountainCount);
+    s1 = lerpColor(shrubColor2, shrubColor3, float(i)/mountainCount);
     s2 = lerpColor(shrubColor3, shrubColor4, float(i)/mountainCount);
   }
   grab = true;
 };
  
-void forest(int[] yheight, float w, float h, int baseColor, int tipColor, int gap) {
+void forest(int[] yheight, float w, float h, int tipColor, int gap) {
   for (int x = 0; x < width; x+=step) {
     if (rcoin()) {
       int ypos = int(random(yheight[int(x/step)], yheight[int(x/step)] + gap));
+      color baseColor = lerpColor(get(x, ypos), get(x + 30, ypos), 0.5);
+      w = w + random(-1, 1);
+      h = h + random(-1, 1);
       tree1(x, ypos, w, h, tipColor, baseColor);
     }
   }
@@ -133,6 +136,7 @@ int[] mountains(int c1, int c2, int pos, int scale, float noiseScale, float bump
 };
 
 void tree1(float x, float y, float w, float h, int c1, int c2) {
+  noStroke();
   x = x - w/2 * step;
   y = y - h/2 * step;
   for (int j = 0; j < h; j++) {
