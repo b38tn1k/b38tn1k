@@ -1,7 +1,11 @@
 //img myi = new img(30, 30, 1.0, 0.0, 0.2);
+int colors[] = {#F6511D, #FFB400, #00A6ED, #E56399, #FFFFFF};
+int rcol() {
+  return colors[int(random(colors.length))];
+};
 
 img[] imgs;
-int count = 30;
+int count = 1;
 PImage bg;
 PImage fg;
 PImage she;
@@ -9,33 +13,55 @@ PImage she;
 int shex;
 int shey;
 
+
 void setup() {
   size(1280, 720, P3D);
   smooth(8);
-  imgs = new img[count];
-  float x = width/count;
-  for (int i = 0; i < count; i++) {
-    imgs[i] = new img(x, random(height), 0, -1*random(5, 10), 0.1);
-    x+=width/count;
-    imgs[i].getImage(loadImage("img.png"));
-  }
-  bg = loadImage("bg.jpg");
-  fg = loadImage("fg.png");
   she = loadImage("she.png");
-  float sc = 0.8;
+  float sc = 1.5;
   she.resize(int(she.width*sc), int(she.height*sc));
   shex = width/2 - she.width/2;
-  shey = height;
+  shey = height/2 - she.height/2;
+  bg = loadImage("bg2.jpg");
+  bg.resize(5000, 5000);
+  imgs = new img[count];
+  float x = width/count;
+  PImage mask = loadImage("mask.png");
+  for (int i = 0; i < count; i++) {
+    imgs[i] = new img(x, random(height), 0, 10, 0.2);
+    x+=width/count;
+    PImage photo = loadImage("img.png");
+    photo.mask(mask);
+    imgs[i].getImage(photo);
+  }
+  saveFrame();
+  
 }
 
+float counter = 0.0;
+float distance = -500;
+float bgcounter = -501;
+
 void draw() {
-  background(bg);
-  for (int i = 0; i < count; i++) {
-    imgs[i].update();
+  counter += 0.1;
+  pushMatrix();
+  translate(width/2 - bg.width/2, height/2 - bg.height/2, bgcounter);
+  bgcounter-=1;
+  image(bg, 0, 0);
+  popMatrix();
+  
+  for (int i = 0; i < 1000; i++) {
+    stroke(rcol());
+    point(int(random(width)), int(random(height)));
   }
-  image(she, shex, shey);
-  shey -= 1;
-  image(fg, 0, 0);
+  
+  if (distance < -300) { distance+=0.5;}
+  
+  pushMatrix();
+  translate(shex, shey, distance);
+  image(she, 0, 0);
+  popMatrix();
+  imgs[0].update();
   saveFrame();
 }
 
@@ -56,20 +82,18 @@ class img {
     i = _img;
     i.resize(int(scale*i.width), int(scale * i.height));
   }
-  void update() { 
-    ypos += yspeed; 
-    if (ypos < -1*i.height) { 
-      ypos = height + i.height;
-      xpos = random(width);
-    }
+  void update() {
     
-    xpos += xspeed; 
-    if (xpos > width) { 
-      xpos = -1*i.width; 
-    }
+    xpos = width/2 - i.width/2;
+    ypos = height/2 - i.height/2;
     pushMatrix();
-    rotateX(-PI/8);
-    image(i,xpos,ypos);
+    translate(width/2 - (i.width/2)*cos(xspeed), ypos);
+    rotateY(xspeed);
+    
+    image(i, 0, 0);
+    translate(xpos, ypos);
     popMatrix();
+    xspeed+=0.005;
+    
   }
 } 
