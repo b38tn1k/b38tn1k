@@ -1,5 +1,19 @@
 int colors[] = {#F6511D, #FFB400, #00A6ED, #E56399, #FFFFFF};
 int step = 3;
+//int skyBlue1 = #7894ef;
+//int skyBlue2 = #c6ffff;
+//int cloudWhite1 = #FFFFFF;
+//int cloudWhite2 = #8995b2;
+////int farMountainColor1 = #8da2c8;
+//int farMountainColor1 = #c1cce1;
+//int farMountainColor2 = #5e748b;
+//int midMountainColor1 = #4e7e40;
+//int midMountainColor2 = #969f0d;
+//int shrubColor1 = #1c6610;
+//int shrubColor2 = #5c6e21;
+//int shrubColor3 = #0d4a03;
+//int shrubColor4 = #51660c;
+
 int skyBlue1 = #7894ef;
 int skyBlue2 = #c6ffff;
 int cloudWhite1 = #FFFFFF;
@@ -13,6 +27,8 @@ int shrubColor1 = #1c6610;
 int shrubColor2 = #5c6e21;
 int shrubColor3 = #0d4a03;
 int shrubColor4 = #51660c;
+
+float transition = 0.0;
 
 PImage bg;
 boolean grab = false;
@@ -58,7 +74,8 @@ void saveImage() {
 
 
 void generate() {
-  
+  saveImage();
+  transition += 0.01;
   sky(0.009);
   int scale = 3;
   float noiseVal = 0.004;
@@ -170,18 +187,21 @@ void sky(float noiseScale) {
 };
 
 void setup() {
-  size(1080, 1080);
+  size(192000, 1080);
   generate();
 };
 
 void draw() {
-  if (grab) {
-    bg = get();
-    grab = false;
-  }
-  if (reset) {
-    background(0);
-    image(bg, 0, 0);
-    reset = false;
-  }
+    generate();
+    exit();
+  
+  //if (grab) {
+  //  bg = get();
+  //  grab = false;
+  //}
+  //if (reset) {
+  //  background(0);
+  //  image(bg, 0, 0);
+  //  reset = false;
+  //}
 };

@@ -1,9 +1,9 @@
-//int colors[] = {#EBB858, #EEA8C1, #D0CBC3, #87B6C4, #EA4140, #5A5787, #D0CBC3, #87B6C4, #EA4140, #5A5787};
+int colors[] = {#EBB858, #EEA8C1, #D0CBC3, #87B6C4, #EA4140, #5A5787, #D0CBC3, #87B6C4, #EA4140, #5A5787};
 //int colors[] = {#F6511D, #FFB400, #00A6ED, #7FB800, #E56399};
 //int colors[] = {#845EC2, #D65DB1, #FF6F91, #FF9671, #FFC75F, #F9F871};
 //int colors[] = {#A534C9, #F327A2, #FF5478, #FF8F58, #FFC650, #F9F871};
 //int colors[] = {#E9E4CF, #EBD662, #CB4B86, #D8B4A4, #C89741, #A29282, #913439, #A1C8C0, #5F9AAA, #5A6062};
-int colors[] = {#00ff00, #ffff00, #00ffff, #ff00ff};
+//int colors[] = {#00ff00, #ffff00, #00ffff, #ff00ff};
 //int colors[] = {#FFFFFF, #1F4979, #AAC4CE, #D1D4D4, #919091, #F2822C, #F1F2F3}; //ford
 //https://palettegenerator.com/ 
 
@@ -41,11 +41,13 @@ void saveImage() {
   println(timestamp);
   saveFrame(timestamp+".png");
 }
-
+int mybg;
 void generate() {
-  clear();
-  int mybg = rcol();
-  background(mybg);
+  if (randint(10) < 4) {
+    clear();
+    mybg = rcol();
+    background(mybg);
+  }
   int c1 = rcol();
   int c2 = rcol();
   while (c1 == mybg) {
@@ -55,7 +57,7 @@ void generate() {
     c2 = rcol();
   }
   for (int i = 0; i < 1; i++) {
-    spiro(100, 100, c1, c2);
+    spiro(random(1080), random(1080), c1, c2);
   }
 }
 
@@ -123,7 +125,7 @@ void spirally() {
 }
 
 void setup() {
-  size(512, 512, P3D);
+  size(1920, 1080, P3D);
   smooth(8);
   //pixelDensity(2);
   background(rcol());
@@ -131,5 +133,6 @@ void setup() {
 }
 
 void draw() {
-  //generate();
+  generate();
+  saveFrame();
 }

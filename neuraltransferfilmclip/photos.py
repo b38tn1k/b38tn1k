@@ -50,7 +50,7 @@ counter = 0
 strings = [ 'la_muse', 'feathers', 'composition_vii', 'mosaic', 'the_scream', 'udnie', 'starry_night', 'candy', 'the_wave']
 # Initialize webcam, cap is the object provided by VideoCapture\n
 
-photos = ['test.jpg']
+photos = ['street.jpg']
 for img in photos:
     frame = cv2.imread(img)
     for style in strings:
