@@ -17,3 +17,5 @@ application.macosx
 *.mov
 *.mp4
 *.ttf
+*.tif
+*.pxm
