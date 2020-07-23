@@ -62,46 +62,46 @@ void flower(int x, int y) {
   float centerbit = random(0.2, 0.8);
   
   //leafs
-  for (int i = 0; i < random(5); i++) {
+  //for (int i = 0; i < random(5); i++) {
     
-    ellipseMode(CORNER);
-    int angle = randint(-30);
-    int tip = int(random(radius/5, radius/3));
-    float leafw = random(0.3, 0.5);
-    int leafy = int(random((y + radius/2), 15));
-    //right
-    if (coin()) {
-      pushMatrix();
-      translate(x, leafy);
-      rotate(radians(angle));
-      fill(#11BF1E);
-      ellipse(0, 0, tip, leafw*tip);
-      fill(255, 255, 255, 40);
-      ellipse(0, 0, tip, leafw*tip*centerbit);
-      popMatrix();
-    }
+  //  ellipseMode(CORNER);
+  //  int angle = randint(-30);
+  //  int tip = int(random(radius/5, radius/3));
+  //  float leafw = random(0.3, 0.5);
+  //  int leafy = int(random((y + radius/2), 15));
+  //  //right
+  //  if (coin()) {
+  //    pushMatrix();
+  //    translate(x, leafy);
+  //    rotate(radians(angle));
+  //    fill(#11BF1E);
+  //    ellipse(0, 0, tip, leafw*tip);
+  //    fill(255, 255, 255, 40);
+  //    ellipse(0, 0, tip, leafw*tip*centerbit);
+  //    popMatrix();
+  //  }
     
-    if (coin()) {
-      //left
-      angle = randint(30) + 180;
-      tip = tip = int(random(radius/5, radius/3));
-      leafy = int(random((y + radius/2), 15));
-      leafw = random(0.3, 0.5);
-      pushMatrix();
-      translate(x, leafy);
-      rotate(radians(angle));
-      fill(#11BF1E);
-      ellipse(0, 0, tip, leafw*tip);
-      fill(255, 255, 255, 40);
-      ellipse(0, 0, tip, leafw*tip*centerbit);
-      popMatrix();
-    }
-  }
+  //  if (coin()) {
+  //    //left
+  //    angle = randint(30) + 180;
+  //    tip = tip = int(random(radius/5, radius/3));
+  //    leafy = int(random((y + radius/2), 15));
+  //    leafw = random(0.3, 0.5);
+  //    pushMatrix();
+  //    translate(x, leafy);
+  //    rotate(radians(angle));
+  //    fill(#11BF1E);
+  //    ellipse(0, 0, tip, leafw*tip);
+  //    fill(255, 255, 255, 40);
+  //    ellipse(0, 0, tip, leafw*tip*centerbit);
+  //    popMatrix();
+  //  }
+  //}
   
-  // the stem
-  int stemwidth = 1;// int(random(1, 3));
-  fill(#11BF1E);
-  rect(x, y, stemwidth, 15);
+  //// the stem
+  //int stemwidth = 1;// int(random(1, 3));
+  //fill(#11BF1E);
+  //rect(x, y, stemwidth, 15);
   
   // petals
   ellipseMode(CENTER);
