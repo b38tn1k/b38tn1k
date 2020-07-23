@@ -31,7 +31,8 @@ int randint(int x) {
   return int(random(x));
 };
 
-
+int level = 0;
+int target_level = 0;
 
 void keyPressed() {
   if (key == 's') {
@@ -44,15 +45,13 @@ void keyPressed() {
 };
 
 void saveImage() {
-  String timestamp = year() + nf(month(), 2) + nf(day(), 2) + "-"  + nf(hour(), 2) + nf(minute(), 2) + nf(second(), 2);
+  String timestamp = "level-" + str(target_level) + "-" + nf(day(), 2) + "-"  + nf(hour(), 2) + nf(minute(), 2) + nf(second(), 2);
   saveFrame(timestamp+".png");
 };
 
 
 
 void generate() {
-  
-  saveImage();
   clear();
   background(255, 0, 255);
   transition += 0.01;
@@ -72,6 +71,7 @@ void generate() {
     int temp = int((height/3)*pos);
     mountainGap = temp - mountainPos; 
     mountainPos = temp;
+    level = i;
     yheight = mountains(c1, c2, mountainPos, scale, noiseVal, bumpScale);
     //forest(yheight, fw, fh, s1, 70);
     pos += 0.3;
@@ -84,6 +84,10 @@ void generate() {
     c2 = lerpColor(farMountainColor2, midMountainColor2, float(i)/mountainCount);
   }
   grab = true;
+  target_level ++;
+  if (target_level > mountainCount) {
+    target_level = 0;
+  }
 };
 
 int[] mountains(int c1, int c2, int pos, int scale, float noiseScale, float bumpScale) {
@@ -109,7 +113,9 @@ int[] mountains(int c1, int c2, int pos, int scale, float noiseScale, float bump
       //float bumpnoise = noise(x*bumpScale, y*bumpScale);
       //this_color = lerpColor(this_color,midColor, bumpnoise);
       fill(this_color);
-      rect(x, y, step, step);
+      if (level == target_level) {
+        rect(x, y, step, step);
+      }
     }
     blend ++;
   }
