@@ -1,10 +1,14 @@
 //int colors[] = {#EBB858, #EEA8C1, #D0CBC3, #87B6C4, #EA4140, #5A5787, #D0CBC3, #87B6C4, #EA4140, #5A5787};
 //green = #7FB800
-int colors[] = {#F6511D, #FFB400, #00A6ED, #7FB800, #E56399, #FFFFFF};
-//int colors[] = {#845EC2, #D65DB1, #FF6F91, #FF9671, #FFC75F, #F9F871};
+//int colors[] = {#F6511D, #FFB400, #00A6ED, #7FB800, #E56399, #FFFFFF};
+//int colors[] = {#666666};
+int colors[] = {#845EC2, #D65DB1, #FF6F91, #FF9671, #FFC75F, #F9F871};
+//int colors[] = {#896234, #906a41, #565c41, #41443b, #a17a4d, #645f49, #526246, #666c5c, #625e3c, #484640, #aa8058, #988964, #9f7d57, #363d36, #866637}; //camo
 //int colors[] = {#F6511D, #FFB400, #00A6ED, #E56399, #FFFFFF};
-
+int _background = #FF00FF ;
+//int _background = 0;
 //int colors[] = {#FFFFFF, #1F4979, #AAC4CE, #D1D4D4, #919091, #F2822C, #F1F2F3}; //ford
+//int colors[] = {#ff71ce, #01cdfe, #05ffa1, #b967ff, #fffb96}; //vaporwave
 int rcol() {
   return colors[int(random(colors.length))];
 };
@@ -35,101 +39,13 @@ void saveImage() {
 }
 
 void generate() {
-  if (randint(10) < 7) {
-    background(0);
-  }
-  
-  int chance = randint(6);
-    
-  // 11x5 grid of invaders
-  // bunkers
-  // tank
-  
-  //background(0);
-  noStroke();
-  if (chance == 0) { 
-    for (int j = 0; j < 15; j++) {
-      for (int i = 0; i < 15; i++) {
-        fill(rcol());
-        invader(i*(width/15) + width/30, j*(height/15) + height/30, 3, random(5.0, 7.0), 8.0);
-      }
-    }
-  }
-  
-  if (chance == 1) { 
-    for (int j = 0; j < 25; j++) {
-      for (int i = 0; i < 25; i++) {
-        fill(rcol());
-        invader(i*(width/25) + width/50, j*(height/25) + height/50, 3, random(5.0, 7.0), 8.0);
-      }
-    }
-  }
-  
-  if (chance == 2) {
-    int vert = 5;
-    int hor = 5;
-    
-    for (int j = 0; j < vert; j++) {
-      for (int i = 0; i < 25; i++) {
-        fill(rcol());
-        invader(i*(width/hor) + width/(2*hor), j*(height/vert) + height/(2*vert), 10, random(5.0, 7.0), 8.0);
-      }
-    }
-  }
-  
-  if (chance == 3) {
-    /////
-    int count = 0;
-    for (int j = 0; j < 5; j++) {
-      fill(rcol());
-      for (int i = 0; i < 11; i++) {
-        //fill(#FFFFFF);
-        
-        if (count == 0) {
-          invader(i*(width/11) + width/22, j*(height/14) + height/5, 5, 7.0, 8.0);
-        }
-        
-        if (count > 0 && count <= 2) {
-          invader(i*(width/11) + width/22, j*(height/14) + height/5, 5, 6.0, 8.0);
-        }
-        
-        if (count > 2) {
-          invader(i*(width/11) + width/22, j*(height/14) + height/5, 5, 5.0, 8.0);
-        }
-      }
-      count++;
-    }
-    fill(#7FB800);
-    for (int i = 0; i < 4; i++) {
-      bunker(i*width/4 + width/8, 4*height/6, 5);
-    }
-    tank(width/2, 5*height/6, 5);
-  }
-  
-  if (chance == 4) {
-    int vert = 2;
-    int hor = 2;
-    
-    for (int j = 0; j < vert; j++) {
-      for (int i = 0; i < 25; i++) {
-        fill(rcol());
-        invader(i*(width/hor) + width/(2*hor), j*(height/vert) + height/(2*vert), 40, random(5.0, 7.0), 8.0);
-      }
-    }
-  }
-  
-  if (chance == 5) {
-    int vert = 1;
-    int hor = 1;
-    
-    for (int j = 0; j < vert; j++) {
-      for (int i = 0; i < 25; i++) {
-        fill(rcol());
-        invader(i*(width/hor) + width/(2*hor), j*(height/vert) + height/(2*vert), 50, random(5.0, 7.0), 8.0);
-      }
-    }
-  }
+  background(0);
+  stroke(255);
+  int pixelSize = 15;
+  invader((width/2) , (height/2), 3  * pixelSize, random(5.0, 7.0), 8);
 }
+  
+  
 
 void tank(int x, int y, int pixelSize) {
   pushMatrix();
@@ -288,10 +204,8 @@ void invader(int x, int y, int pixelSize, float invLength, float invHeight) {
 }
 
 void setup() {
-  size(1920, 1080, P3D);
-  smooth(8);
-  pixelDensity(2);
-  background(0);
+  size(700  , 700);
+  background(_background);
   generate();
   noStroke();
 }
@@ -302,4 +216,108 @@ void mouseClicked() {
 
 void draw() {
   //generate();
+  //saveImage();
 }
+
+
+  //none of this
+  
+  //if (randint(7) < 7) {
+  //  background(_background);
+  //}
+  
+  //int chance = randint(6);
+  //chance = 0;
+  //chance = 1;
+  
+  //int pixelSize = 5;
+  //// 11x5 grid of invaders
+  //// bunkers
+  //// tank
+  
+  ////background(0);
+  //noStroke();
+  //if (chance == 0) { 
+  //  for (int j = 0; j < 15; j++) {
+  //    for (int i = 0; i < 15; i++) {
+  //      fill(rcol());
+  //      invader(i*(width/15) + width/30, j*(height/15) + height/30, 3  * pixelSize, random(5.0, 7.0), 8);
+  //    }
+  //  }
+  //}
+  
+  //if (chance == 1) { 
+  //  for (int j = 0; j < 25; j++) {
+  //    for (int i = 0; i < 25; i++) {
+  //      fill(rcol());
+  //      invader(i*(width/25) + width/50, j*(height/25) + height/50, 3 * pixelSize, random(5.0, 7.0), 8);
+  //    }
+  //  }
+  //}
+  
+  //if (chance == 2) {
+  //  int vert = 5;
+  //  int hor = 5;
+    
+  //  for (int j = 0; j < vert; j++) {
+  //    for (int i = 0; i < 25; i++) {
+  //      fill(rcol());
+  //      invader(i*(width/hor) + width/(2*hor), j*(height/vert) + height/(2*vert), 10 * pixelSize, random(5.0, 7.0), 8);
+  //    }
+  //  }
+  //}
+  
+  //if (chance == 3) {
+  //  /////
+  //  background(_background);
+  //  int count = 0;
+  //  for (int j = 0; j < 5; j++) {
+  //    fill(rcol());
+  //    for (int i = 0; i < 11; i++) {
+  //      //fill(#FFFFFF);
+        
+  //      if (count == 0) {
+  //        invader(i*(width/11) + width/22, j*(height/14) + height/5, 5 * pixelSize, 7.0, 8);
+  //      }
+        
+  //      if (count > 0 && count <= 2) {
+  //        invader(i*(width/11) + width/22, j*(height/14) + height/5, 5 * pixelSize, 6.0, 8);
+  //      }
+        
+  //      if (count > 2) {
+  //        invader(i*(width/11) + width/22, j*(height/14) + height/5, 5 * pixelSize, 5.0, 8);
+  //      }
+  //    }
+  //    count++;
+  //  }
+  //  fill(#7FB800);
+  //  for (int i = 0; i < 4; i++) {
+  //    bunker(i*width/4 + width/8, 4*height/6, pixelSize*5);
+  //  }
+  //  tank(width/2, 5*height/6, pixelSize*5);
+  //}
+  
+  //if (chance == 4) {
+  //  int vert = 2;
+  //  int hor = 2;
+    
+  //  for (int j = 0; j < vert; j++) {
+  //    for (int i = 0; i < 25; i++) {
+  //      fill(rcol());
+  //      invader(i*(width/hor) + width/(2*hor), j*(height/vert) + height/(2*vert), 40 * pixelSize, random(5.0, 7.0), 8);
+  //    }
+  //  }
+  //}
+  
+  //if (chance == 5) {
+  //  int vert = 1;
+  //  int hor = 1;
+    
+  //  for (int j = 0; j < vert; j++) {
+  //    for (int i = 0; i < 25; i++) {
+  //      fill(rcol());
+  //      invader(i*(width/hor) + width/(2*hor), j*(height/vert) + height/(2*vert), 50 * pixelSize, random(5.0, 7.0), 8);
+  //    }
+  //  }
+  //}
+//}

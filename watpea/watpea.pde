@@ -18,9 +18,9 @@ void setup() {
     cols = w / scl;
     rows = h / scl;
     terrain = new float[cols+1][rows+1];
-    logo = loadImage("logo.png");
-    mask = loadImage("mask.png");
-    logo.mask(mask);
+    //logo = loadImage("logo.png");
+    //mask = loadImage("mask.png");
+    //logo.mask(mask);
     
 }
 
@@ -70,7 +70,7 @@ void draw() {
     vertex( 540,  540, 0, 1080, 1080);
     vertex(-540,  540, 0, 0,   1080);
     endShape();
-    saveFrame();
+    //saveFrame();
        
 }
     

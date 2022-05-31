@@ -34,22 +34,28 @@ void saveImage() {
 }
 
 void generate() {
-  background(rcol());
-  strokeWeight(2.5);
-  stroke(rcol());
+  int bg = 0;//#FF00FF;//rcol();
+  background(bg);
+  strokeWeight(10);
+  
   int c1 = rcol();
   int c2 = rcol();
-  fill(c1);
+  stroke(c1);
+  fill(bg);
   
   String[] data = loadStrings("pulsar.csv");
   for (int i = 0; i < data.length; i++) {
     float[] points = float(split(data[i],','));
     beginShape();
     for (int j = 0; j < 300; j++) {
-      vertex(100 + 2 * j, -80 + height - (8 * (79 - i) + 2 * points[j]));
+      int x = 100 + 2 * j;
+      float y = -80 + 800 - (8 * (79 - i) + 2 * points[j]);
+      vertex(x*4, y*4);
     }
     endShape();
-    fill(lerpColor(c1, c2, float(i)/data.length));
+    stroke(lerpColor(c1, c2, float(i)/data.length));
+    //fill(lerpColor(c1, c2, float(i)/data.length));
+    fill(bg);
   }
   //noLoop();
   saveImage();
@@ -57,9 +63,9 @@ void generate() {
 }
 
 void setup() {
-  size(800, 800, P2D);
-  smooth(8);
-  pixelDensity(2);
+  size(3200, 3200, P2D);
+  //smooth(8);
+  //pixelDensity(2);
   background(255);
   generate();
 }
